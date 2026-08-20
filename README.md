@@ -43,18 +43,18 @@ allows you to do things like:
 #### One-Command Install
 
 ```sh
-npm i git+https://github.com/SAV-7-X/react-native-readium-updated.git
+npm i git+https://github.com/SAV-7-X/react-native-readium-updated.git react-native-nitro-modules
 ```
 
 If you prefer Yarn:
 
 ```sh
-yarn add git+https://github.com/SAV-7-X/react-native-readium-updated.git
+yarn add git+https://github.com/SAV-7-X/react-native-readium-updated.git react-native-nitro-modules
 ```
 
-This package is designed for a clean install: it brings in `react-native-nitro-modules`
-transitively and runs the iOS setup automatically during install, so you do not need to
-edit `ios/` or `android/` folders by hand for a standard setup.
+This package relies on `react-native-nitro-modules` as a peer dependency. Install both
+packages in your app, then run the iOS setup if needed. You should not need to edit the
+`ios/` or `android/` folders by hand for a standard setup.
 
 It is also compatible with React Native's New Architecture stack, including JSI and Fabric,
 through Nitro Modules. In practice that means the native view is exposed through generated

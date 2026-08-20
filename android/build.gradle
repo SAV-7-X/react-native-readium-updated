@@ -155,7 +155,15 @@ def kotlin_version = getExtOrDefault('kotlinVersion')
 dependencies {
   // noinspection GradleDynamicVersion
   api "com.facebook.react:react-native:+"
-  implementation project(':react-native-nitro-modules')
+  def nitroModulesProject = rootProject.findProject(':react-native-nitro-modules')
+  if (nitroModulesProject != null) {
+    implementation project(nitroModulesProject.path)
+  } else {
+    throw new GradleException(
+      "react-native-nitro-modules is required to build react-native-readium-updated on Android. " +
+      "Install it in your app with `npm i react-native-nitro-modules` or `yarn add react-native-nitro-modules`."
+    )
+  }
   implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 
   // readium deps

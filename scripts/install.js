@@ -126,9 +126,17 @@ if (!exists(podfilePath)) {
 
 const currentPodfile = read(podfilePath);
 const { contents: nextPodfile, changed } = ensurePodfile(currentPodfile);
-const reactNativeNitroModulesTarget = path.dirname(
-  require.resolve('react-native-nitro-modules/package.json', { paths: [packageRoot] })
-);
+let reactNativeNitroModulesTarget;
+try {
+  reactNativeNitroModulesTarget = path.dirname(
+    require.resolve('react-native-nitro-modules/package.json', { paths: [packageRoot] })
+  );
+} catch (error) {
+  process.stderr.write(
+    '[react-native-readium-updated] react-native-nitro-modules is not installed in the app yet. Install it with `npm i react-native-nitro-modules` (or `yarn add react-native-nitro-modules`) and rebuild.\n'
+  );
+  process.exit(0);
+}
 const reactNativeNitroModulesLink = path.join(appRoot, 'node_modules', 'react-native-nitro-modules');
 const linkedNitroModules = ensureSymlink(reactNativeNitroModulesLink, reactNativeNitroModulesTarget);
 const didWork = changed || linkedNitroModules;
