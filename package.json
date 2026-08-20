@@ -62,13 +62,13 @@
     "e-reader",
     "read"
   ],
-  "repository": "http://github.com/5-stones/react-native-readium",
+  "repository": "https://github.com/SAV-7-X/react-native-readium-updated",
   "author": "Jacob Spizziri <jspizziri@weare5stones.com> (https://github.com/jspizziri)",
   "license": "MIT",
   "bugs": {
-    "url": "http://github.com/5-stones/react-native-readium/issues"
+    "url": "https://github.com/SAV-7-X/react-native-readium-updated/issues"
   },
-  "homepage": "http://github.com/5-stones/react-native-readium#readme",
+  "homepage": "https://github.com/SAV-7-X/react-native-readium-updated#readme",
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },

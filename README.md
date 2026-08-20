@@ -44,120 +44,40 @@ allows you to do things like:
 
 | Dark Mode                                                                                        | Light Mode                                                                                         |
 | ------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------------- |
-| ![Dark Mode](https://github.com/5-stones/react-native-readium/blob/main/docs/demo-dark-mode.gif) | ![Light Mode](https://github.com/5-stones/react-native-readium/blob/main/docs/demo-light-mode.gif) |
+| ![Dark Mode](https://github.com/SAV-7-X/react-native-readium-updated/blob/main/docs/demo-dark-mode.gif) | ![Light Mode](https://github.com/SAV-7-X/react-native-readium-updated/blob/main/docs/demo-light-mode.gif) |
 
 ## Installation
 
-#### Prerequisites
-
-1. **iOS**: Requires an iOS target >= `13.0` (see the iOS section for more details).
-2. **Android**: Requires `compileSdkVersion` >= `31` (see the Android section for more details).
-
-This library uses [Nitro Modules](https://nitro.margelo.com/) and supports both the old and new React Native architectures.
-
-#### Install Module
-
-**NPM**
+#### One-Command Install
 
 ```sh
-npm install react-native-readium-updated
+npm i git+https://github.com/SAV-7-X/react-native-readium-updated.git
 ```
 
-**Yarn**
+If you prefer Yarn:
 
 ```sh
-yarn add react-native-readium-updated
+yarn add git+https://github.com/SAV-7-X/react-native-readium-updated.git
 ```
 
-The package now installs `react-native-nitro-modules` transitively and
-automatically patches your iOS Podfile to add the Readium CocoaPods source and
-helper calls. If CocoaPods is available on your machine, it also runs `pod
-install` for you.
+This package is designed for a clean install: it brings in `react-native-nitro-modules`
+transitively and runs the iOS setup automatically during install, so you do not need to
+edit `ios/` or `android/` folders by hand for a standard setup.
 
-#### iOS
+It is also compatible with React Native's New Architecture stack, including JSI and Fabric,
+through Nitro Modules. In practice that means the native view is exposed through generated
+Nitro/Fabric bindings instead of a legacy manual bridge.
 
-Requirements:
+#### Requirements
 
-- Minimum iOS deployment target: iOS 15.1
+- iOS deployment target: iOS 15.1 or newer
 - Swift compiler: Swift 6.0
-- Xcode: Xcode 16.4 (or newer)
+- Xcode: Xcode 16.4 or newer
+- Android compileSdkVersion: 31 or newer
+- JDK: 17 or newer
+- Kotlin: 2.3.20 or newer
 
-The package installer handles the Readium CocoaPods source and the required
-`readium_pods` / `readium_post_install` hooks for you. If CocoaPods is
-available on your machine, it also runs `pod install` after patching the
-Podfile.
-
-If you ever need to wire it up manually, the same changes are the usual
-fallback:
-
-```rb
-source 'https://github.com/readium/podspecs'
-source 'https://cdn.cocoapods.org/'
-
-...
-
-target 'ExampleApp' do
-  ...
-  readium_pods
-  ...
-  post_install do |installer|
-    ...
-    readium_post_install(installer)
-  end
-end
-```
-
-#### Android
-
-##### Breaking change when upgrading from v4 to v5!
-
-This release upgrades the Android native implementation to a newer Readium Kotlin Toolkit.
-Most apps won’t need code changes, but your **Android build configuration** might.
-
-Requirements:
-
-- **JDK 17** is required to build the Android app (the library targets Java/Kotlin 17).
-- **Kotlin** must be >= `2.3.20` (the Readium Kotlin Toolkit is compiled against that stdlib;
-  older compilers fail with "compiled with an incompatible version of Kotlin").
-- **compileSdkVersion** must be >= `31`.
-
-If you're not using `compileSdkVersion` >= 31 you'll need to update that:
-
-```groovy
-// android/build.gradle
-...
-buildscript {
-    ...
-    ext {
-        ...
-        compileSdkVersion = 31
-...
-```
-
-##### Core library desugaring (may be required)
-
-If you see build errors related to missing Java 8+ APIs (commonly `java.time.*`), enable
-core library desugaring in your app:
-
-```groovy
-// android/app/build.gradle
-android {
-  ...
-  compileOptions {
-    coreLibraryDesugaringEnabled true
-  }
-}
-
-dependencies {
-  coreLibraryDesugaring "com.android.tools:desugar_jdk_libs:2.1.2"
-}
-```
-
-##### Expo managed workflow
-
-If your app uses Expo managed workflow (native `android/` is generated via `prebuild` / EAS),
-apply the desugaring settings through an Expo config plugin (or `expo-build-properties`) so
-they persist across builds.
+These are build-tool minimums, not manual install steps.
 
 ## Usage
 
@@ -210,7 +130,7 @@ const MyComponent: React.FC = () => {
 
 ### Highlights & Note Taking
 
-![Decorators](https://github.com/5-stones/react-native-readium/blob/main/docs/demo-decorators.gif)
+![Decorators](https://github.com/SAV-7-X/react-native-readium-updated/blob/main/docs/demo-decorators.gif)
 
 The `selectionActions`, `decorations`, `onSelectionAction`, and `onDecorationActivated` props work together to build highlighting and note-taking features. Here's how the flow works:
 
@@ -297,13 +217,13 @@ Key concepts:
 - **`extras`**: An optional `Record<string, string>` on each `Decoration` where you can store arbitrary metadata like notes, timestamps, or the original selected text.
 - **`onSelectionChange`**: Fires as the user adjusts their text selection, useful for showing a live preview or tracking selection state.
 
-[Take a look at the Example App](https://github.com/5-stones/react-native-readium/blob/main/apps/example-native/src/App.tsx) for a full implementation with color picking, note editing, and highlight management.
+[Take a look at the Example App](https://github.com/SAV-7-X/react-native-readium-updated/blob/main/apps/example-native/src/App.tsx) for a full implementation with color picking, note editing, and highlight management.
 
 ### Full-Text Search
 
 EPUB publications support full-text search via the [ref methods](#ref-methods).
 Results are **paginated lazily** — `search` resolves with the first
-[`SearchPage`](https://github.com/5-stones/react-native-readium/blob/main/src/specs/ReadiumView.nitro.ts),
+[`SearchPage`](https://github.com/SAV-7-X/react-native-readium-updated/blob/main/src/specs/ReadiumView.nitro.ts),
 and you call `loadMoreSearchResults` to fetch each subsequent page while
 `page.hasMore` is `true`:
 
@@ -344,7 +264,7 @@ const { results, hasMore, isSearching, search, loadMore, clear } =
 // search('whale')   loadMore()   clear()
 ```
 
-See the [example app](https://github.com/5-stones/react-native-readium/blob/main/apps/common-app/src/components/SearchPanel.tsx)
+See the [example app](https://github.com/SAV-7-X/react-native-readium-updated/blob/main/apps/common-app/src/components/SearchPanel.tsx)
 for a full search UI with infinite scroll.
 
 ## Supported Formats & DRM
@@ -370,13 +290,13 @@ DRM is not supported at this time. However, there is a clear path to [support it
 
 | Name                    | Type                                                                                                                                                | Optional           | Description                                                                                                                                                                                                                                                                         |
 | ----------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `file`                  | [`File`](https://github.com/5-stones/react-native-readium/blob/main/src/interfaces/File.ts)                                                         | :x:                | A file object containing the path to the eBook file on disk. Use `File.initialLocation` to set the reader's position on mount.                                                                                                                                                      |
+| `file`                  | [`File`](https://github.com/SAV-7-X/react-native-readium-updated/blob/main/src/interfaces/File.ts)                                                         | :x:                | A file object containing the path to the eBook file on disk. Use `File.initialLocation` to set the reader's position on mount.                                                                                                                                                      |
 | `preferences`           | [`Partial<Preferences>`](https://github.com/readium/swift-toolkit/blob/main/docs/Guides/Navigator%20Preferences.md#appendix-preference-constraints) | :white_check_mark: | An object that allows you to control various aspects of the reader's UI (epub only)                                                                                                                                                                                                 |
-| `decorations`           | [`DecorationGroup[]`](https://github.com/5-stones/react-native-readium/blob/main/src/interfaces/Decoration.ts)                                      | :white_check_mark: | An array of decoration groups to render in the publication (e.g. highlights, underlines).                                                                                                                                                                                           |
-| `selectionActions`      | [`SelectionAction[]`](https://github.com/5-stones/react-native-readium/blob/main/src/interfaces/SelectionAction.ts)                                 | :white_check_mark: | Custom actions to show in the context menu when the user selects text.                                                                                                                                                                                                              |
+| `decorations`           | [`DecorationGroup[]`](https://github.com/SAV-7-X/react-native-readium-updated/blob/main/src/interfaces/Decoration.ts)                                      | :white_check_mark: | An array of decoration groups to render in the publication (e.g. highlights, underlines).                                                                                                                                                                                           |
+| `selectionActions`      | [`SelectionAction[]`](https://github.com/SAV-7-X/react-native-readium-updated/blob/main/src/interfaces/SelectionAction.ts)                                 | :white_check_mark: | Custom actions to show in the context menu when the user selects text.                                                                                                                                                                                                              |
 | `style`                 | `ViewStyle`                                                                                                                                         | :white_check_mark: | A traditional style object.                                                                                                                                                                                                                                                         |
 | `onLocationChange`      | `(locator: Locator) => void`                                                                                                                        | :white_check_mark: | A callback that fires whenever the location is changed (e.g. the user transitions to a new page).                                                                                                                                                                                   |
-| `onPublicationReady`    | `(event: PublicationReadyEvent) => void`                                                                                                            | :white_check_mark: | A callback that fires once the publication is loaded and provides access to the table of contents, positions, and metadata. See the [`PublicationReadyEvent`](https://github.com/5-stones/react-native-readium/blob/main/src/interfaces/PublicationReady.ts) interface for details. |
+| `onPublicationReady`    | `(event: PublicationReadyEvent) => void`                                                                                                            | :white_check_mark: | A callback that fires once the publication is loaded and provides access to the table of contents, positions, and metadata. See the [`PublicationReadyEvent`](https://github.com/SAV-7-X/react-native-readium-updated/blob/main/src/interfaces/PublicationReady.ts) interface for details. |
 | `onDecorationActivated` | `(event: DecorationActivatedEvent) => void`                                                                                                         | :white_check_mark: | A callback that fires when a user taps on a decoration (e.g. a highlight).                                                                                                                                                                                                          |
 | `onSelectionChange`     | `(event: SelectionEvent) => void`                                                                                                                   | :white_check_mark: | A callback that fires when the user's text selection changes.                                                                                                                                                                                                                       |
 | `onSelectionAction`     | `(event: SelectionActionEvent) => void`                                                                                                             | :white_check_mark: | A callback that fires when the user taps a custom selection action from the context menu.                                                                                                                                                                                           |
@@ -412,7 +332,7 @@ const MyComponent: React.FC = () => {
 | `goTo(locator)`           | Navigate to a specific location in the publication (e.g. a chapter or bookmark).                                                                                                                                                                |
 | `goForward()`             | Navigate forward in the publication (e.g. next page).                                                                                                                                                                                           |
 | `goBackward()`            | Navigate backward in the publication (e.g. previous page).                                                                                                                                                                                      |
-| `search(query, options?)` | Start a full-text search; resolves with the first [`SearchPage`](https://github.com/5-stones/react-native-readium/blob/main/src/specs/ReadiumView.nitro.ts) of results. Most consumers should prefer the [`useSearch`](#full-text-search) hook. |
+| `search(query, options?)` | Start a full-text search; resolves with the first [`SearchPage`](https://github.com/SAV-7-X/react-native-readium-updated/blob/main/src/specs/ReadiumView.nitro.ts) of results. Most consumers should prefer the [`useSearch`](#full-text-search) hook. |
 | `loadMoreSearchResults()` | Resolves with the next `SearchPage` for the in-flight search (empty terminal page when exhausted).                                                                                                                                              |
 | `cancelSearch()`          | Cancel the in-flight search and release its iterator.                                                                                                                                                                                           |
 

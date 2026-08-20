@@ -23,7 +23,7 @@ Pod::Spec.new do |s|
   s.platforms    = { :ios => "15.1" }
   s.ios.deployment_target = "15.1"
 
-  s.source       = { :git => "http://github.com/5-stones/react-native-readium.git", :tag => "#{s.version}" }
+  s.source       = { :git => "https://github.com/SAV-7-X/react-native-readium-updated.git", :tag => "#{s.version}" }
   s.source_files = "ios/**/*.{h,m,mm,swift}"
   s.public_header_files = ["ios/**/*.h"]
 

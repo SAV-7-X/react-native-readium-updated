@@ -148,9 +148,9 @@ if (didWork) {
         stdio: 'inherit',
       });
     } catch (error) {
-      process.stderr.write('[react-native-readium-updated] pod install failed. Please run it manually in the ios folder.\n');
+      process.stderr.write('[react-native-readium-updated] Automatic CocoaPods install failed. Check your CocoaPods setup and rerun the install command.\n');
     }
   } else {
-    process.stderr.write('[react-native-readium-updated] CocoaPods was not found. Run pod install in the ios folder.\n');
+    process.stderr.write('[react-native-readium-updated] CocoaPods was not found, so iOS pods could not be installed automatically.\n');
   }
 }
