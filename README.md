@@ -7,15 +7,7 @@
 
 ---
 
-## Have A Bug/Feature You Care About?
 
-We :heart: open source. We work on the things that are important to us when
-we're able to work on them. Have an issue you care about?
-
-- [Dive Into The Code!](CONTRIBUTING.md)
-- [Sponsor Your Issue](#sponsor-the-library)
-
----
 
 ## Overview
 
