@@ -71,6 +71,26 @@ Nitro/Fabric bindings instead of a legacy manual bridge.
 
 These are build-tool minimums, not manual install steps.
 
+#### Android Setup
+
+The Readium Android artifacts require core library desugaring in the consuming app.
+If your `android/app/build.gradle` does not already enable it, add the following:
+
+```gradle
+android {
+  compileOptions {
+    coreLibraryDesugaringEnabled true
+  }
+}
+
+dependencies {
+  coreLibraryDesugaring "com.android.tools:desugar_jdk_libs:2.1.5"
+}
+```
+
+The bundled example app already includes this configuration in
+[`apps/example-native/android/app/build.gradle`](/media/adarsh/CodeDrive/react-native-readium/apps/example-native/android/app/build.gradle#L115).
+
 ## Usage
 
 ### Basic Example
