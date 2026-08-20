@@ -6,7 +6,7 @@ This is a Next.js web example demonstrating the use of `react-native-readium` in
 
 - EPUB reader powered by Readium
 - Web-based implementation using Next.js
-- Shared components from `common-app` workspace
+- Shared components from the local `common-app` package
 - Table of contents navigation
 - Reading preferences customization
 - Dark theme support
@@ -20,10 +20,10 @@ This is a Next.js web example demonstrating the use of `react-native-readium` in
 
 ### Installation
 
-From the root of the monorepo:
+From the root of the repo:
 
 ```bash
-yarn install
+yarn bootstrap
 ```
 
 ### Development
@@ -32,7 +32,7 @@ Run the development server:
 
 ```bash
 # From the root
-yarn example:nextjs dev
+yarn example:nextjs
 
 # Or from this directory
 yarn dev

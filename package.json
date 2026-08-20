@@ -27,9 +27,6 @@
     "!**/__fixtures__",
     "!**/__mocks__"
   ],
-  "workspaces": [
-    "apps/*"
-  ],
   "scripts": {
     "test": "jest",
     "typescript": "tsc --noEmit",
@@ -40,11 +37,13 @@
     "prepare": "rimraf lib && tsc",
     "postinstall": "node scripts/install.js",
     "release": "release-it",
-    "example": "yarn workspace example-native",
-    "example:nextjs": "yarn workspace example-nextjs",
+    "example": "yarn --cwd apps/example-native start",
+    "example:android": "yarn --cwd apps/example-native android",
+    "example:ios": "yarn --cwd apps/example-native ios",
+    "example:nextjs": "yarn --cwd apps/example-nextjs dev",
     "nitrogen": "npx nitrogen",
     "pods": "cd apps/example-native && pod-install --quiet",
-    "bootstrap": "yarn example && yarn && yarn pods",
+    "bootstrap": "yarn install && yarn prepare && yarn --cwd apps/example-native install && yarn --cwd apps/example-nextjs install && yarn pods",
     "version": "yarn changelog && git add CHANGELOG.md",
     "postversion": "npm run publish:git && npm run publish:npm",
     "publish:git": "git push && git push --tags",
