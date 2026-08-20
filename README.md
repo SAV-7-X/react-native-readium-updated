@@ -1,6 +1,6 @@
-# react-native-readium
+# react-native-readium-updated
 
-[![NPM version](https://img.shields.io/npm/v/react-native-readium.svg?color=success&label=npm%20package&logo=npm)](https://www.npmjs.com/package/react-native-readium)
+[![NPM version](https://img.shields.io/npm/v/react-native-readium-updated.svg?color=success&label=npm%20package&logo=npm)](https://www.npmjs.com/package/react-native-readium-updated)
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 ![PRs welcome!](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)
 ![This project is released under the MIT license](https://img.shields.io/badge/license-MIT-blue.svg)
@@ -60,14 +60,19 @@ This library uses [Nitro Modules](https://nitro.margelo.com/) and supports both 
 **NPM**
 
 ```sh
-npm install react-native-readium react-native-nitro-modules
+npm install react-native-readium-updated
 ```
 
 **Yarn**
 
 ```sh
-yarn add react-native-readium react-native-nitro-modules
+yarn add react-native-readium-updated
 ```
+
+The package now installs `react-native-nitro-modules` transitively and
+automatically patches your iOS Podfile to add the Readium CocoaPods source and
+helper calls. If CocoaPods is available on your machine, it also runs `pod
+install` for you.
 
 #### iOS
 
@@ -77,41 +82,30 @@ Requirements:
 - Swift compiler: Swift 6.0
 - Xcode: Xcode 16.4 (or newer)
 
-The Readium pods live in a custom spec repo, so you need to add the Readium
-source to your `Podfile` ([see more on that here](https://github.com/readium/swift-toolkit/issues/38)).
+The package installer handles the Readium CocoaPods source and the required
+`readium_pods` / `readium_post_install` hooks for you. If CocoaPods is
+available on your machine, it also runs `pod install` after patching the
+Podfile.
 
-##### Breaking change when upgrading from v4 to v5!
-
-If you are migrating from v4 to v5, please note that you must update your iOS
-Podfile to add the Readium spec repo `source` and the `readium_pods` /
-`readium_post_install` helpers shown below.
+If you ever need to wire it up manually, the same changes are the usual
+fallback:
 
 ```rb
-# ./ios/Podfile
 source 'https://github.com/readium/podspecs'
 source 'https://cdn.cocoapods.org/'
 
 ...
 
-platform :ios, '15.1'
-
-...
-
 target 'ExampleApp' do
-  config = use_native_modules!
   ...
   readium_pods
   ...
   post_install do |installer|
-    react_native_post_install(installer, ...)
+    ...
     readium_post_install(installer)
   end
 end
 ```
-
-Finally, install the pods:
-
-`pod install`
 
 #### Android
 
@@ -171,8 +165,8 @@ they persist across builds.
 
 ```tsx
 import React, { useState } from 'react';
-import { ReadiumView } from 'react-native-readium';
-import type { File } from 'react-native-readium';
+import { ReadiumView } from 'react-native-readium-updated';
+import type { File } from 'react-native-readium-updated';
 
 const MyComponent: React.FC = () => {
   const [file] = useState<File>({
@@ -189,8 +183,8 @@ Access the table of contents, positions, and metadata when the publication is re
 
 ```tsx
 import React, { useState } from 'react';
-import { ReadiumView } from 'react-native-readium';
-import type { File, PublicationReadyEvent } from 'react-native-readium';
+import { ReadiumView } from 'react-native-readium-updated';
+import type { File, PublicationReadyEvent } from 'react-native-readium-updated';
 
 const MyComponent: React.FC = () => {
   const [file] = useState<File>({
@@ -227,7 +221,7 @@ The `selectionActions`, `decorations`, `onSelectionAction`, and `onDecorationAct
 
 ```tsx
 import React, { useState, useCallback } from 'react';
-import { ReadiumView } from 'react-native-readium';
+import { ReadiumView } from 'react-native-readium-updated';
 import type {
   File,
   Decoration,
@@ -235,7 +229,7 @@ import type {
   SelectionAction,
   SelectionActionEvent,
   DecorationActivatedEvent,
-} from 'react-native-readium';
+} from 'react-native-readium-updated';
 
 // Register a "Highlight" action in the text selection context menu
 const selectionActions: SelectionAction[] = [
@@ -341,7 +335,7 @@ manages the accumulated results plus `isSearching` / `isLoadingMore` /
 can't advance the iterator concurrently):
 
 ```tsx
-import { ReadiumView, useSearch } from 'react-native-readium';
+import { ReadiumView, useSearch } from 'react-native-readium-updated';
 
 const ref = useRef<ReadiumViewRef>(null);
 const { results, hasMore, isSearching, search, loadMore, clear } =
@@ -393,8 +387,8 @@ The `ReadiumView` component accepts a ref that exposes imperative navigation met
 
 ```tsx
 import React, { useRef } from 'react';
-import { ReadiumView } from 'react-native-readium';
-import type { ReadiumViewRef, Locator } from 'react-native-readium';
+import { ReadiumView } from 'react-native-readium-updated';
+import type { ReadiumViewRef, Locator } from 'react-native-readium-updated';
 
 const MyComponent: React.FC = () => {
   const ref = useRef<ReadiumViewRef>(null);

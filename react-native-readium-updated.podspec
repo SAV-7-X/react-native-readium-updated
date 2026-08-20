@@ -13,7 +13,7 @@ load File.join(__dir__, "scripts/readium_pods.rb")
 load File.join(__dir__, "scripts/readium_post_install.rb")
 
 Pod::Spec.new do |s|
-  s.name         = "react-native-readium"
+  s.name         = "react-native-readium-updated"
   s.version      = package["version"]
   s.summary      = package["description"]
   s.homepage     = package["homepage"]

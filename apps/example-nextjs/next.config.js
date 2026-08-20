@@ -24,7 +24,7 @@ const config = {
     'react-native-ratings',
     'react-native-reanimated',
     'react-native-worklets',
-    'react-native-readium',
+    'react-native-readium-updated',
     'react-native-safe-area-context',
     'react-native-screens',
     'react-native-size-matters',
@@ -84,7 +84,7 @@ const config = {
         '../../node_modules/react-native-safe-area-context'
       ),
       // Use web-specific implementation for Readium (source files)
-      'react-native-readium$': path.resolve(__dirname, '../../src/index.tsx'),
+      'react-native-readium-updated$': path.resolve(__dirname, '../../src/index.tsx'),
       // Use source files for react-native-ratings (dist has JSX)
       'react-native-ratings': path.resolve(
         __dirname,

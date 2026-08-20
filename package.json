@@ -1,5 +1,5 @@
 {
-  "name": "react-native-readium",
+  "name": "react-native-readium-updated",
   "version": "5.0.0",
   "description": "A react-native wrapper for https://readium.org/",
   "main": "lib/src/index",
@@ -18,8 +18,9 @@
     "cpp",
     "nitrogen/generated",
     "nitro.json",
+    "scripts/*.js",
     "scripts/*.rb",
-    "react-native-readium.podspec",
+    "react-native-readium-updated.podspec",
     "!lib/typescript/example",
     "!ios/build",
     "!**/__tests__",
@@ -37,6 +38,7 @@
     "prettier": "prettier --check \"**/*.{js,jsx,ts,tsx,json,md}\"",
     "prettier:fix": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
     "prepare": "rimraf lib && tsc",
+    "postinstall": "node scripts/install.js",
     "release": "release-it",
     "example": "yarn workspace example-native",
     "example:nextjs": "yarn workspace example-nextjs",
@@ -100,8 +102,7 @@
   },
   "peerDependencies": {
     "react": "*",
-    "react-native": ">=0.78.0",
-    "react-native-nitro-modules": "*"
+    "react-native": ">=0.78.0"
   },
   "jest": {
     "preset": "react-native",
@@ -184,6 +185,7 @@
     "@readium/navigator-html-injectables": "^2.6.3",
     "@readium/shared": "^2.4.0",
     "pdfjs-dist": "^6.0.227",
+    "react-native-nitro-modules": "^0.35.0",
     "use-deep-compare": "^1.1.0"
   },
   "resolutions": {
